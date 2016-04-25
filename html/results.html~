@@ -1,0 +1,12 @@
+<html ng-app="Results">
+
+<script type="text/javascript" src="Scripts/angularjsv1.5.5.js"></script>
+<script type="text/javascript" src="Scripts/ResultsController.js"></script>
+<body ng-controller="ResultsController as resctrl">
+
+{{resctrl.variable}}
+sahil
+</body>
+
+
+</html>
