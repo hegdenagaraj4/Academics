@@ -1,0 +1,1 @@
+SELECT projectno,((avg(rating)*count(rating) + 3.5 * 3)/(3+count(rating))) FROM `Votes` group by projectno
