@@ -1,1 +1,18 @@
-SELECT projectno,((avg(rating)*count(rating) + 3.5 * 3)/(3+count(rating))) FROM `Votes` group by projectno
+SELECT projectno,avg(rating),((avg(rating)*count(rating) + 3.5 * 3)/(3+count(rating))) FROM `Votes` group by projectno
+
+UPDATE `Votes` SET `Rating`='1' WHERE projectno='1'
+UPDATE `Votes` SET `Rating`='2' WHERE projectno='2'
+UPDATE `Votes` SET `Rating`='3' WHERE projectno='3'
+UPDATE `Votes` SET `Rating`='4' WHERE projectno='4'
+UPDATE `Votes` SET `Rating`='1' WHERE projectno='5'
+UPDATE `Votes` SET `Rating`='5' WHERE projectno='6'
+UPDATE `Votes` SET `Rating`='3' WHERE projectno='7'
+UPDATE `Votes` SET `Rating`='2' WHERE projectno='8'
+UPDATE `Votes` SET `Rating`='4' WHERE projectno='9'
+UPDATE `Votes` SET `Rating`='1' WHERE projectno='10'
+UPDATE `Votes` SET `Rating`='3' WHERE projectno='11'
+UPDATE `Votes` SET `Rating`='2' WHERE projectno='12'
+UPDATE `Votes` SET `Rating`='3' WHERE projectno='13'
+UPDATE `Votes` SET `Rating`='4' WHERE projectno='14'
+UPDATE `Votes` SET `Rating`='2' WHERE projectno='15'
+UPDATE `Votes` SET `Rating`='5' WHERE projectno='16'

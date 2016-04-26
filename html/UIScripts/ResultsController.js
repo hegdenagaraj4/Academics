@@ -24,10 +24,19 @@ function resultsController(http,interval,$scope,technophiliaService){
 		$scope.myData = data;
 		
 	};
-	
+	$scope.getLeaders = function(data,numberOfLeaders){
+		var copiedJsonData = JSON.parse(JSON.stringify(data));//cloning the object to not modify the model variable
+		$scope.leaders = copiedJsonData.sort(function sorting(a,b){
+			return parseFloat(b.Rating) - parseFloat(a.Rating);//descending
+		}).slice(0,numberOfLeaders).filter(function removeNotVotedTeams(json){//filtering out non voted teams
+			return parseFloat(json.Rating) > 0;
+		});
+	};
 	$scope.fetchData = function(){
 		return technophiliaService.fetchData().then(function success(response){
 			$scope.prepareDataForBarChart(response.data);
+			$scope.getLeaders($scope.myData,5);
+			
 		},function failure(response){
 			console.log("error");
 		});

@@ -7,15 +7,45 @@
 		<script type="text/javascript" src="UIScripts/TechnophiliaService.js"></script>
 		<script type="text/javascript" src="UIScripts/ResultsController.js"></script>
 		<script type="text/javascript" src="UIScripts/ChartDirective.js"></script>
+		<script type="text/javascript" src="UIScripts/LineGraph.js"></script>
+		
+		<link rel="stylesheet" href="UIScripts/css/foundation.min.css">
 	</head>
 	<meta charset="utf-8">
 	<body ng-controller="resultsController">
-		<div >
+		<div class = "row" id="tophalf">
+			<div id="trend" class="large-6 columns">
+				<tp-line-trend ng-show="dataFetched" data='myData'></tp-line-trend>
+			</div>
+			<!-- <div id="leaderboard" class="large-6 columns">
+			<table class="table table-bordered table-striped">
+	        <thead>
+	            <tr>
+            	    <th>Rank</th>	            
+            	    <th>Team</th>
+	                <th>Rating</th>
+	                <th>Voter Count</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        	<tr ng-repeat="leader in leaders">
+	                <td>{{$index + 1}}</td>	        	
+	                <td>{{leader.ProjectNo}}</td>
+	                <td>{{leader.Rating}}</td>	
+                    <td>{{leader.Voters}}</td>
+	            </tr>
+	        </tbody>
+	    </table>
+			</div>
 		</div>
-		<div>
-		<cr-d3-bars ng-show="dataFetched" data='myData'></cr-d3-bars>
+		<div class="row">
+			<div class="col-centered">
+				<cr-d3-bars ng-show="dataFetched" data='myData'></cr-d3-bars>
+			</div> -->
 		</div>
-		
+	
+	
+			
 		
 		
 	</body>
