@@ -13,6 +13,8 @@ function resultsController(http,interval,$scope,technophiliaService){
 	                 {ProjectNo: '17', Rating: 0},{ProjectNo: '18', Rating: 0},
 	                 {ProjectNo: '19', Rating: 0},{ProjectNo: '20', Rating: 0}
 	             ];
+	$scope.leaders = {};
+	$scope.currentProjectAverageRatingTrend = [];
 	
 	
 	$scope.prepareDataForBarChart = function(data){
@@ -42,7 +44,26 @@ function resultsController(http,interval,$scope,technophiliaService){
 		});
 	};
 	
+	$scope.prepareDataForTrendLine = function(data){
+		if(data.length > 0 && data[0]['AverageRating']){
+			$scope.currentProjectAverageRatingTrend.push({
+				"Time":new Date(),
+				"Rating":data[0]['AverageRating']
+			});	
+		}
+	};
+	
+	$scope.fetchCurrentProjectAverageRating = function(){
+		return technophiliaService.fetchCurrentProjectAverageRating().then(function success(response){
+			$scope.prepareDataForTrendLine(response.data);
+			
+		},function failure(response){
+			console.log("error");
+		});
+	};
+	
 	interval($scope.fetchData,3000);
+	interval($scope.fetchCurrentProjectAverageRating,3000);
 	
 	(function Initalize(){
 		$scope.dataFetched = false;
