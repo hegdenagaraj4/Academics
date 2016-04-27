@@ -26,53 +26,50 @@ app.directive( 'tpLineTrend', [
     	// Define the axes
 //    	tickFormat(d3.time.format("%H"));
     	var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%M:%S")).ticks(5);
-
     	var yAxis = d3.svg.axis().scale(y).orient("left").ticks(5);    
        
-
+    	
+	    y.domain([0,5]);
+	    
+	    //Y axis
+	    svg.append("g")
+	        .attr("class", "trendlineYAxis")
+	        .call(yAxis);
+	    
+	  //X axis
+        svg.append("g")
+            .attr("class", "trendlineXAxis")
+            .style({ 'stroke': 'Black', 'fill': 'Black', 'stroke-width': '0px'})
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+	    
+        var line = d3.svg.line()
+	        .x(function(d) { return x(d.Time); })
+	        .y(function(d) { return y(d.Rating); })
+	        .interpolate("basis");
+        
+        // Add the valueline path.
+ 	    svg.append("path")
+ 	        .attr("class", "trendline")
+ 	        .attr("stroke", "blue")
+ 	      	.attr("stroke-width", 2)
+ 	      	.attr("fill", "none");
+        
         //Render graph based on 'data'
         scope.render = function(data) {
         
-        	// Scale the range of the data
 //        	x.domain([new Date("2016-04-27 15:09:04"),new Date("2016-04-27 15:20:04")])
-        	
-
     	    x.domain([d3.min(data, function(d) { return d.Time;}),
-    	    		 (d3.max(data,function (d){return d.Time}).getTime() + 2*60*100)]);
-    	    
-    	    y.domain([0,5]);    	    
+    	    		 (d3.max(data,function (d){return d.Time}).getTime() + 2 * 60 * 100)]);
     	    
             //Redraw the axes
-          svg.selectAll('g.axis').remove();
-              
-          //X axis
-           svg.append("g")
-               .attr("class", "x axis")
-               .style({ 'stroke': 'Black', 'fill': 'Black', 'stroke-width': '0px'})
-               .attr("transform", "translate(0," + height + ")")
-               .call(xAxis);
-           //Y axis
+//          svg.selectAll('g.axis').remove();
 
-           svg.append("g")
-               .attr("class", "y axis")
-               .call(yAxis);
+           svg.select(".trendlineXAxis")
+               .call(xAxis);           
            
-           var line = d3.svg.line()
-           .x(function(d) { return x(d.Time); })
-           .y(function(d) { return y(d.Rating); });
-           
-           
-        // Add the valueline path.
-     	    svg.append("path")
-     	        .attr("class", "line")
-     	        .attr("d", line(data))
-     	        .attr("stroke", "blue")
-     	      	.attr("stroke-width", 2)
-     	      	.attr("fill", "none");
-
-          
-              
-//          var color = d3.scale.ordinal().range(["#c6dbef", "#9ecae1", "#6baed6"]);
+           svg.select(".trendline")
+           		.attr("d",line(data));
         };
 
          //Watch 'data' and run scope.render(newVal) whenever it changes

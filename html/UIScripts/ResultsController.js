@@ -14,7 +14,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 	                 {ProjectNo: '19', Rating: 0},{ProjectNo: '20', Rating: 0}
 	             ];
 	$scope.leaders = {};
-	$scope.currentProjectAverageRatingTrend = [];
+	$scope.currentProjectAverageRatingTrend = [{Time:new Date(),Rating:0}];
 	
 	
 	$scope.prepareDataForBarChart = function(data){
