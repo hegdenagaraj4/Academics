@@ -1,0 +1,19 @@
+.trendlineXAxis .tick{
+	display:none;
+}
+
+.axis path{
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.trendline {
+  fill: none;
+  stroke: #763626;
+  stroke-width: 1.5px;
+}
+
+.barChartXAxis path{
+	display:none;
+}

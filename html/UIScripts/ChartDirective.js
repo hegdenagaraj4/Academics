@@ -7,7 +7,7 @@ app.directive( 'crD3Bars', [
       },
       link: function (scope, element) {
     	  
-        var margin = {top: 20, right: 20, bottom: 30, left: 40},
+        var margin = {top: 20, right: 20, bottom: 30, left: 60},
           width = 960 - margin.left - margin.right,
           height = 360 - margin.top - margin.bottom;
         
@@ -31,7 +31,7 @@ app.directive( 'crD3Bars', [
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left")
-            .ticks(10);
+            .ticks(5);
         //Render graph based on 'data'
         scope.render = function(data) {
           //Set our scale's domains
@@ -42,20 +42,20 @@ app.directive( 'crD3Bars', [
           svg.selectAll('g.axis').remove();
           //X axis
           svg.append("g")
-              .attr("class", "x axis")
+              .attr("class", "barChartXAxis axis")
               .attr("transform", "translate(0," + height + ")")
               .call(xAxis);
               
           //Y axis
           svg.append("g")
-              .attr("class", "y axis")
+              .attr("class", "barChartYAxis axis")
               .call(yAxis)
             .append("text")
-              .attr("transform", "rotate(-90)")
-              .attr("y", 6)
-              .attr("dy", ".71em")
+              .attr("transform","translate(-40," + height / 3 + ") rotate(-90) ")
+//              .attr("y", 6)
+//              .attr("dy", ".71em")
               .style("text-anchor", "end")
-              .text("Rating");
+              .text("Global Rating");
               
           var color = d3.scale.ordinal().range(["#c6dbef", "#9ecae1", "#6baed6"]);
           
