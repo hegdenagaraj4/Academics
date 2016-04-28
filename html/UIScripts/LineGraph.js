@@ -46,7 +46,7 @@ app.directive( 'tpLineTrend', [
         var line = d3.svg.line()
 	        .x(function(d) { return x(d.Time); })
 	        .y(function(d) { return y(d.Rating); })
-	        .interpolate("basis");
+	        .interpolate("linear");
         
         // Add the valueline path.
  	    svg.append("path")
