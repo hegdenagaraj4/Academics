@@ -14,8 +14,10 @@ function resultsController(http,interval,$scope,technophiliaService){
 	                 {ProjectNo: '19', Rating: 0},{ProjectNo: '20', Rating: 0}
 	             ];
 	$scope.leaders = {};
-	$scope.currentProjectAverageRatingTrend = [{Time:new Date(),Rating:0}];
+	var recallInterval = 3000;
 	
+	$scope.currentProjectAverageRatingTrend = [];
+	$scope.currentProjectNo = null;
 	
 	$scope.prepareDataForBarChart = function(data){
 		for(var index=0;index<data.length;index++){
@@ -38,18 +40,25 @@ function resultsController(http,interval,$scope,technophiliaService){
 		return technophiliaService.fetchData().then(function success(response){
 			$scope.prepareDataForBarChart(response.data);
 			$scope.getLeaders($scope.myData,5);
-			
 		},function failure(response){
 			console.log("error");
 		});
 	};
 	
 	$scope.prepareDataForTrendLine = function(data){
-		if(data.length > 0 && data[0]['AverageRating']){
-			$scope.currentProjectAverageRatingTrend.push({
-				"Time":new Date(),
-				"Rating":data[0]['AverageRating']
-			});	
+		if(data.length > 0){//check for data is there or not
+			if(data[0]['ProjectNo']){//check if project no is there in the json or not
+				if(parseInt(data[0]['ProjectNo']) !== +$scope.currentProjectNo){// if project changed ..set to default
+					$scope.currentProjectAverageRatingTrend = [];
+					$scope.currentProjectNo = parseInt(data[0]['ProjectNo']);
+				}
+			}
+			if (data[0]['AverageRating']) {
+				$scope.currentProjectAverageRatingTrend.push({
+					"Time":new Date(),
+					"Rating":data[0]['AverageRating']
+				});		
+			}
 		}
 	};
 	
@@ -62,8 +71,8 @@ function resultsController(http,interval,$scope,technophiliaService){
 		});
 	};
 	
-	interval($scope.fetchData,3000);
-	interval($scope.fetchCurrentProjectAverageRating,3000);
+	interval($scope.fetchData,recallInterval);
+	interval($scope.fetchCurrentProjectAverageRating,recallInterval);
 	
 	(function Initalize(){
 		$scope.dataFetched = false;

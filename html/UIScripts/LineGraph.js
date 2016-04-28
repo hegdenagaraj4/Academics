@@ -37,9 +37,10 @@ app.directive( 'tpLineTrend', [
 	        .call(yAxis);
 	    
 	  //X axis
+//	    #763626
         svg.append("g")
             .attr("class", "trendlineXAxis")
-            .style({ 'stroke': 'Black', 'fill': 'Black', 'stroke-width': '0px'})
+            .style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '2px','shape-rendering':'crispEdges'})
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 	    

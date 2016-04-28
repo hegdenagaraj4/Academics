@@ -8,7 +8,7 @@
 	}
  	$currentProjectNumber = $rows[0]['ProjectNo'];
  	
- 	$query = "select avg(rating) as AverageRating from Votes where ProjectNo=$currentProjectNumber";
+ 	$query = "select ProjectNo,avg(rating) as AverageRating from Votes where ProjectNo=$currentProjectNumber";
  	$result = mysql_query($query) or die(mysql_error());
  	$rows = array();
  	while($r = mysql_fetch_assoc($result)) {
