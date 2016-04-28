@@ -39,7 +39,7 @@ app.directive('tpLineTrend', [ function() {
 			svg.select(".trendlineYAxis").append("text")
 				.attr("transform","translate(-30," + height / 4 + ") rotate(-90) ")
 //				.attr("y", 6).attr("dy",".71em")
-				.style("text-anchor", "end").text("Average Rating");
+				.style("text-anchor", "end").text("Rating Trend");
 			
 			// X axis
 			// #763626
@@ -59,15 +59,20 @@ app.directive('tpLineTrend', [ function() {
 			// Add the valueline path.
 			svg.append("path").attr("class", "trendline")
 
+			x.domain([new Date(),new Date().getTime() + 2* 60*100]);
+			
 			scope.render = function(data) {
 
 				// x.domain([new Date("2016-04-27 15:09:04"),new
 				// Date("2016-04-27 15:20:04")])
-				x.domain([ d3.min(data, function(d) {
-					return d.Time;
-				}), (d3.max(data, function(d) {
-					return d.Time
-				}).getTime() + 2 * 60 * 100) ]);
+				if(data.length > 0){
+					x.domain([ d3.min(data, function(d) {
+						return d.Time;
+					}), (d3.max(data, function(d) {
+						return d.Time
+					}).getTime() + 2 * 60 * 100) ]);	
+				}
+				
 
 				svg.select(".trendlineXAxis axis").call(xAxis);
 

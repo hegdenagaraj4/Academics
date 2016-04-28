@@ -13,12 +13,22 @@
 		<link rel="stylesheet" href="UIScripts/css/app.css">
 	</head>
 	<meta charset="utf-8">
-	<body ng-controller="resultsController" style="background-color:#336b87">
+	<body ng-controller="resultsController" style="background-color:#E7EAB3">
 		<div class = "row" id="tophalf">
 			<div id="trend" class="large-6 columns">
-				<tp-line-trend ng-show="dataFetched" data='currentProjectAverageRatingTrend'></tp-line-trend>
+			<div class="row">
+			  <div class="small-6 small-centered columns chartLabel" style="text-align:center">
+			  	Team {{currentProjectNo}}
+			  </div>
+			</div>
+				<tp-line-trend data='currentProjectAverageRatingTrend'></tp-line-trend>
 			</div>
 			<div id="leaderboard" class="large-6 columns">
+			<div class="row">
+			  <div class="small-4 small-centered columns chartLabel" style="text-align:center">
+			  	LeaderBoard
+			  </div>
+			</div>
 			<table class="table table-bordered table-striped">
 	        <thead>
 	            <tr>
@@ -32,27 +42,22 @@
 	        	<tr ng-repeat="leader in leaders">
 	                <td>{{$index + 1}}</td>	        	
 	                <td>{{leader.ProjectNo}}</td>
-	                <td>{{leader.Rating}}</td>	
+	                <td>{{leader.Rating | number : 2}}</td>	
                     <td>{{leader.Voters}}</td>
 	            </tr>
 	        </tbody>
 	    </table>
 			</div>
 		</div>
-		<div class="row">
+		<div id="barChart" class="row">
 			<div class="col-centered">
 				<cr-d3-bars ng-show="dataFetched" data='myData'></cr-d3-bars>
+				<div class="row">
+				  <div class="small-2 small-centered columns chartLabel" style="text-align:center">
+				  	Votes Distribution
+				  </div>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-centered">
-				label
-			</div>
-		</div>
-	
-	
-			
-		
-		
+		</div>		
 	</body>
 </html>

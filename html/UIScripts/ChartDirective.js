@@ -21,7 +21,7 @@ app.directive( 'crD3Bars', [
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+        var x = d3.scale.ordinal().rangeRoundBands([0, width],.5);
         var y = d3.scale.linear().range([height, 0])
 
         var xAxis = d3.svg.axis()
@@ -36,7 +36,9 @@ app.directive( 'crD3Bars', [
         scope.render = function(data) {
           //Set our scale's domains
           x.domain(data.map(function(d) { return d.ProjectNo; }));
-          y.domain([Math.ceil(d3.min(data, function(d) { return d.Rating; }) -0.9 ), d3.max(data, function(d) { return d.Rating; })]);
+          var min = d3.min(data, function(d) { return d.Rating; });
+          var max = d3.max(data, function(d) { return d.Rating; });
+          y.domain([Math.ceil(parseFloat(min) -0.9 ),parseFloat(max) + 0.09]);
           
           //Redraw the axes
           svg.selectAll('g.axis').remove();
@@ -51,32 +53,29 @@ app.directive( 'crD3Bars', [
               .attr("class", "barChartYAxis axis")
               .call(yAxis)
             .append("text")
-              .attr("transform","translate(-40," + height / 3 + ") rotate(-90) ")
-//              .attr("y", 6)
-//              .attr("dy", ".71em")
+              .attr("transform","translate(-45," + height / 3 + ") rotate(-90)")
               .style("text-anchor", "end")
               .text("Global Rating");
               
-          var color = d3.scale.ordinal().range(["#c6dbef", "#9ecae1", "#6baed6"]);
+          var colors = ["#004445", "#6fb98f","#2c7873"];
+          var color = d3.scale.ordinal().range(colors);
           
           var bars = svg.selectAll(".bar").data(data);
           bars.enter()
             .append("rect")
             .attr("class", "bar")
             .attr("x", function(d) { return x(d.ProjectNo); })
-            .attr("width", x.rangeBand())
-            .style("fill", function(d, i) { return color(i%3); });
+            .attr("width",x.rangeBand())
+            .style("fill", function(d, i) { return color(i%colors.length); });
 
           //Animate bars
           bars
               .transition()
-              .duration(1000)
+              .duration(3000)
               .attr('height', function(d) { return height - y(d.Rating); })
               .attr("y", function(d) { return y(d.Rating); })
         };
 
-         //Watch 'data' and run scope.render(newVal) whenever it changes
-         //Use true for 'objectEquality' property so comparisons are done on equality and not reference
           scope.$watch('data', function(){
                scope.render(scope.data);
           }, true);  

@@ -10,10 +10,41 @@
 
 .trendline {
   fill: none;
-  stroke: #763626;
+  stroke: #004445;
   stroke-width: 1.5px;
 }
 
 .barChartXAxis path{
 	display:none;
+}
+
+.chartLabel{
+	 font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	 /* font-weight: bold; */
+	 /* font-size: 20px; */
+}
+
+#tophalf {
+	padding-top:2%;
+}
+
+#leaderboard th,td{
+	text-align:center;
+}
+
+#leaderboard tbody tr:nth-child(even) {
+
+    background-color: #2c7873;
+}
+
+#leaderboard tbody tr:nth-child(odd) {
+    background-color: #6fb98f;
+}
+
+#leaderboard thead{
+	background-color:#004445;
+}
+
+#leaderboard table{
+	color:white;
 }
