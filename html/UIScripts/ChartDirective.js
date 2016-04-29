@@ -21,8 +21,8 @@ app.directive( 'crD3Bars', [
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var x = d3.scale.ordinal().rangeRoundBands([0, width],.5);
-        var y = d3.scale.linear().range([height, 0])
+        var x = d3.scale.ordinal().rangeRoundBands([0, width],.4);
+        var y = d3.scale.linear().range([height, 0]);
 
         var xAxis = d3.svg.axis()
             .scale(x)
@@ -38,7 +38,7 @@ app.directive( 'crD3Bars', [
           x.domain(data.map(function(d) { return d.ProjectNo; }));
           var min = d3.min(data, function(d) { return d.Rating; });
           var max = d3.max(data, function(d) { return d.Rating; });
-          y.domain([Math.ceil(parseFloat(min) -0.9 ),parseFloat(max) + 0.09]);
+          y.domain([parseFloat(min) -0.09 ,parseFloat(max) + 0.09]);
           
           //Redraw the axes
           svg.selectAll('g.axis').remove();
@@ -58,9 +58,11 @@ app.directive( 'crD3Bars', [
               .text("Global Rating");
               
           var colors = ["#004445", "#6fb98f","#2c7873"];
+//          colors = ['#F2D1CA'];
           var color = d3.scale.ordinal().range(colors);
           
           var bars = svg.selectAll(".bar").data(data);
+          
           bars.enter()
             .append("rect")
             .attr("class", "bar")
@@ -68,12 +70,20 @@ app.directive( 'crD3Bars', [
             .attr("width",x.rangeBand())
             .style("fill", function(d, i) { return color(i%colors.length); });
 
+          /*bars.append("text")
+          .attr("x", 500 / 2)
+          .attr("y", function(d) { return y(d.Rating) + 3; })
+          .attr("dy", ".75em")
+          .text(function(d) { return d.ProjectNo; });*/
+          
           //Animate bars
           bars
               .transition()
               .duration(3000)
               .attr('height', function(d) { return height - y(d.Rating); })
               .attr("y", function(d) { return y(d.Rating); })
+              
+              
         };
 
           scope.$watch('data', function(){

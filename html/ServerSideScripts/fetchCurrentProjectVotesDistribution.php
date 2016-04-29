@@ -8,7 +8,8 @@
 	}
  	$currentProjectNumber = $rows[0]['ProjectNo'];
  	
- 	$query = "select ProjectNo,avg(rating) as AverageRating from Votes where ProjectNo=$currentProjectNumber";
+ 	//SELECT ProjectNo,rating,count(*) as PerRatingCount FROM `Votes` WHERE projectno='10' group by rating
+ 	$query = "select ProjectNo,Rating,count(*) as Count from Votes where ProjectNo='$currentProjectNumber' group by rating";
  	$result = mysql_query($query) or die(mysql_error());
  	$rows = array();
  	while($r = mysql_fetch_assoc($result)) {

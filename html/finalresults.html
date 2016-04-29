@@ -8,44 +8,28 @@
 		<script type="text/javascript" src="UIScripts/ResultsController.js"></script>
 		<script type="text/javascript" src="UIScripts/ChartDirective.js"></script>
 		<script type="text/javascript" src="UIScripts/LineGraph.js"></script>
-		<script type="text/javascript" src="UIScripts/PieGraph.js"></script>
 		
 		<link rel="stylesheet" href="UIScripts/css/foundation.min.css">
 		<link rel="stylesheet" href="UIScripts/css/app.css">
 	</head>
 	<meta charset="utf-8">
 	<body ng-controller="resultsController" style="background-color:#E7EAB3">
-		<div class = "row" id="tophalf">
-		
-		<div class="row">
-				  <div class="small-2 small-centered columns chartLabel" style="text-align:center">
-				  	Team {{currentProjectNo}}
-				  </div>
-				</div>
-			<div id="trend" class="large-6 columns">
-				<!-- <div class="row">
-				  <div class="small-6 small-centered columns chartLabel" style="text-align:center">
-				  	Team {{currentProjectNo}}
-				  </div>
-				</div> -->
-				<tp-line-trend data='currentProjectAverageRatingTrend'></tp-line-trend>
-			</div>
-			<div id="piechart" class="large-6 columns">
-				<!-- <div class="row">
-				  <div class="small-6 small-centered columns chartLabel" style="text-align:center">
-				  	Team {{currentProjectNo}}
-				  </div>
-				</div> -->
-				<tp-pie-trend data='currentProjectVotingDistribution'></tp-pie-trend>
-			</div>
-			
-			 <!-- <div id="leaderboard" class="large-6 columns">
+		<div class = "row" ng-show="dataRatingFetched" id="tophalf">
+			<!-- <div id="trend" class="large-6 columns">
 			<div class="row">
-			  <div class="small-4 small-centered columns chartLabel" style="text-align:center">
-			  	LeaderBoard
+			  <div class="small-6 small-centered columns chartLabel" style="text-align:center">
+			  	Team {{currentProjectNo}}
 			  </div>
-			</div> 
-			<table class="table table-bordered table-striped">
+			</div>
+				<tp-line-trend data='currentProjectAverageRatingTrend'></tp-line-trend>
+			</div> -->
+			 <div id="leaderboard" class="large-10 columns small-centered">
+				<div class="row">
+				  <div class="small-4 small-centered columns chartLabel" style="text-align:center">
+				  	LeaderBoard
+				  </div>
+				</div> 
+			<table class="table">
 	        <thead>
 	            <tr>
             	    <th>Rank</th>	            
@@ -63,7 +47,7 @@
 	            </tr>
 	        </tbody>
 	    </table>
-			</div> -->
+			</div>
 		</div>
 		<div id="barChart" class="row">
 			<div class="col-centered">
