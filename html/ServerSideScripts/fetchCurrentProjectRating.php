@@ -1,14 +1,17 @@
 <?php
 	require_once 'connect.php';
-	$query = 'select * from Projects';
+	$query = "select * from Project where Status='1'";
 	$result = mysql_query($query) or die(mysql_error());
 	$rows = array();
 	while($r = mysql_fetch_assoc($result)) {
 		$rows[] = $r;
 	}
- 	$currentProjectNumber = $rows[0]['ProjectNo'];
+ 	$currentProjectNumber = $rows[0]['project_id'];
+
+ 	$query = "select P.project_id,P.project_name,AVG(R.rating) as AverageRating from Rating as R 
+ 	inner join 
+ 	Project as P on P.project_id where P.project_id='$currentProjectNumber'";
  	
- 	$query = "select ProjectNo,avg(rating) as AverageRating from Votes where ProjectNo=$currentProjectNumber";
  	$result = mysql_query($query) or die(mysql_error());
  	$rows = array();
  	while($r = mysql_fetch_assoc($result)) {

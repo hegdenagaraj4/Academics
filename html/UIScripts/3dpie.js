@@ -6,6 +6,30 @@ app.directive('tpPieTrend', [ function() {
 		},
 		link : function(scope, element) {
 
+			
+			var salesData=[
+			           	{label:"Basic", color:"#3366CC",value:20},
+			           	{label:"Plus", color:"#DC3912",value:20},
+			           	{label:"Lite", color:"#FF9900",value:20},
+			           	{label:"Elite", color:"#109618",value:20},
+			           	{label:"Delux", color:"#990099",value:20}
+			           ];
+
+			           var svg = d3.select(element[0]).append("svg").attr("width",600).attr("height",300);
+
+			           svg.append("g").attr("id","salesDonut");
+
+			           Donut3D.draw("salesDonut", salesData, 150, 150, 130, 100, 30, 0.4);
+			           	
+			           function changeData(){
+			           	Donut3D.transition("salesDonut", randomData(), 130, 100, 30, 0.4);
+			           }
+
+			           function randomData(){
+			           	return salesData.map(function(d){ 
+			           		return {label:d.label, value:1000*Math.random(), color:d.color};});
+			           }
+			           
 			/*var dataset = [
 			               { Rating: '5', Count: 20 }, 
 			               { Rating: '4', Count: 20 },
@@ -13,7 +37,7 @@ app.directive('tpPieTrend', [ function() {
 			               { Rating: '2', Count: 40 },
 			               { Rating: '1', Count: 2 }
 			             ];*/
-         var width = 600;
+         /*var width = 600;
          var height = 270;
          var radius = Math.min(width, height) / 2;
          var donutWidth = 75;
@@ -78,7 +102,7 @@ app.directive('tpPieTrend', [ function() {
 			};
 			scope.$watch('data', function() {
 				scope.render(scope.data);
-			}, true);
+			}, true);*/
 		}
 	};
 } ]);

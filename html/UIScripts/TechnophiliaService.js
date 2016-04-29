@@ -10,7 +10,7 @@ function technophiliaService(http){
 		},
 		fetchCurrentProjectVotingDistibution:function(){
 			return http({method:'GET',url: 'ServerSideScripts/fetchCurrentProjectVotesDistribution.php'}); 
-		}		
+		}
 	};
 	
 };
