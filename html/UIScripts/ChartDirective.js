@@ -21,17 +21,32 @@ app.directive( 'crD3Bars', [
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var x = d3.scale.ordinal().rangeRoundBands([0, width],.4);
+        var x = d3.scale.ordinal().rangeRoundBands([0, width],.2);
         var y = d3.scale.linear().range([height, 0]);
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .orient("bottom");
+            .orient("bottom")
+            .ticks(20);
 
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left")
             .ticks(5);
+        
+        svg.append("g")
+	        .attr("class", "barChartXAxis axis")
+	        .attr("transform", "translate(0," + height + ")")
+	        .call(xAxis);
+        
+        svg.append("g")
+	        .attr("class", "barChartYAxis axis")
+	        .call(yAxis)
+	      .append("text")
+	        .attr("transform","translate(-45," + height / 2 + ") rotate(-90)")
+	        .style("text-anchor", "Middle")
+	        .text("Global Rating");
+        
         //Render graph based on 'data'
         scope.render = function(data) {
           //Set our scale's domains
@@ -41,21 +56,15 @@ app.directive( 'crD3Bars', [
           y.domain([parseFloat(min),parseFloat(max) + 0.09]);
           
           //Redraw the axes
-          svg.selectAll('g.axis').remove();
+///          svg.selectAll('g.axis').remove();
+          
           //X axis
-          svg.append("g")
-              .attr("class", "barChartXAxis axis")
-              .attr("transform", "translate(0," + height + ")")
+          svg.select(".barChartXAxis")
               .call(xAxis);
               
           //Y axis
-          svg.append("g")
-              .attr("class", "barChartYAxis axis")
-              .call(yAxis)
-            .append("text")
-              .attr("transform","translate(-45," + height / 3 + ") rotate(-90)")
-              .style("text-anchor", "end")
-              .text("Global Rating");
+          svg.select(".barChartYAxis")
+              .call(yAxis);
               
           var colors = ["#004445", "#6fb98f","#2c7873"];
 //          colors = ['#F2D1CA'];
@@ -69,20 +78,13 @@ app.directive( 'crD3Bars', [
             .attr("x", function(d) { return x(d.ProjectNo); })
             .attr("width",x.rangeBand())
             .style("fill", function(d, i) { return color(i%colors.length); });
-
-          /*bars.append("text")
-          .attr("x", 500 / 2)
-          .attr("y", function(d) { return y(d.Rating) + 3; })
-          .attr("dy", ".75em")
-          .text(function(d) { return d.ProjectNo; });*/
           
           //Animate bars
           bars
               .transition()
-              .duration(3000)
               .attr('height', function(d) { return height - y(d.Rating); })
               .attr("y", function(d) { return y(d.Rating); })
-              
+              .duration(3000)
               
         };
 

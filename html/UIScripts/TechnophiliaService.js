@@ -10,6 +10,16 @@ function technophiliaService(http){
 		},
 		fetchCurrentProjectVotingDistibution:function(){
 			return http({method:'GET',url: 'ServerSideScripts/fetchCurrentProjectVotesDistribution.php'}); 
+		},
+		fetchAllProjects:function(){
+			return http({method:'GET',url: 'ServerSideScripts/fetchAllProjects.php'}); 
+		},
+		updateCurrentProject:function(currentProject){
+			return http({
+				method:'GET',
+				url: 'ServerSideScripts/updateCurrentProject.php',
+				params:{'currentProject':currentProject}
+			}); 
 		}
 	};
 	

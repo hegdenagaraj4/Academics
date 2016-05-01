@@ -2,16 +2,16 @@ app.controller('resultsController',['$http','$interval','$scope','technophiliaSe
 function resultsController(http,interval,$scope,technophiliaService){
 		
 	$scope.myData = [
-	                 /*{ProjectNo: '1', Rating: 0},{ProjectNo: '2', Rating: 0},
+	                 {ProjectNo: '1', Rating: 0},{ProjectNo: '2', Rating: 0},
 	                 {ProjectNo: '3', Rating: 0},{ProjectNo: '4', Rating: 0},
 	                 {ProjectNo: '5', Rating: 0},{ProjectNo: '6', Rating: 0},
-	                 {ProjectNo: '7', Rating: 0},{ProjectNo: '8', Rating: 0},
+	                 {ProjectNo: '7', Rating:0},{ProjectNo: '8', Rating: 0},
 	                 {ProjectNo: '9', Rating: 0},{ProjectNo: '10', Rating: 0},
 	                 {ProjectNo: '11', Rating: 0},{ProjectNo: '12', Rating: 0},
 	                 {ProjectNo: '13', Rating: 0},{ProjectNo: '14', Rating: 0},
 	                 {ProjectNo: '15', Rating: 0},{ProjectNo: '16', Rating: 0},
 	                 {ProjectNo: '17', Rating: 0},{ProjectNo: '18', Rating: 0},
-	                 {ProjectNo: '19', Rating: 0},{ProjectNo: '20', Rating: 0}*/
+	                 {ProjectNo: '19', Rating: 0},{ProjectNo: '20', Rating: 0}
 	             ];
 	$scope.leaders = {};
 	var recallInterval = 3000;

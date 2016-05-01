@@ -85,7 +85,7 @@ app.directive('tpPieTrend', [ function() {
 				path.data(pie(data));
 		         
 				path.transition()
-					.duration(750)
+					.duration(3000)
 					.attrTween("d",arcTween);
 				
 				function arcTween(a) {

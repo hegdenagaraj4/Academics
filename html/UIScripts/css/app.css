@@ -2,7 +2,8 @@
 	display:none;
 }
 
-.axis path{
+.axis path,
+.axis line{
   fill: none;
   stroke: rgb(0, 0, 0);
   shape-rendering: crispEdges;

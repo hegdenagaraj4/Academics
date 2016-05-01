@@ -37,9 +37,9 @@ app.directive('tpLineTrend', [ function() {
 			svg.append("g").attr("class", "trendlineYAxis axis").call(yAxis);
 
 			svg.select(".trendlineYAxis").append("text")
-				.attr("transform","translate(-30," + height / 4 + ") rotate(-90) ")
+				.attr("transform","translate(-30," + height / 2 + ") rotate(-90) ")
 //				.attr("y", 6).attr("dy",".71em")
-				.style("text-anchor", "end").text("Rating Trend");
+				.style("text-anchor", "Middle").text("Rating Trend");
 			
 			// X axis
 			// #763626
@@ -48,7 +48,7 @@ app.directive('tpLineTrend', [ function() {
 
 			svg.select(".trendlineXAxis").append("text").attr("transform",
 					"translate(" + width / 2 + ",0)").attr("y", 6).attr("dy",
-					".71em").style("text-anchor", "end").text("Time");
+					".71em").style("text-anchor", "Middle").text("Time");
 
 			var line = d3.svg.line().x(function(d) {
 				return x(d.Time);
