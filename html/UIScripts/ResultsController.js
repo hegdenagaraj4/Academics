@@ -52,11 +52,13 @@ function resultsController(http,interval,$scope,technophiliaService){
 		if(data.length > 0){//check for data is there or not
 			if(data[0]['ProjectNo']){//check if project no is there in the json or not
 				if(parseInt(data[0]['ProjectNo']) !== +$scope.currentProjectNo){// if project changed ..set to default
-					$scope.currentProjectVotingDistribution = [];
+					$scope.currentProjectAverageRatingTrend = [];
 					$scope.currentProjectNo = parseInt(data[0]['ProjectNo']);
 				}
+			}else{
+				$scope.currentProjectAverageRatingTrend = [];
 			}
-			
+				
 			
 			if (data[0]['AverageRating']) {
 				$scope.currentProjectAverageRatingTrend.push({
@@ -78,19 +80,22 @@ function resultsController(http,interval,$scope,technophiliaService){
 	
 	$scope.prepareDataForVotingDistribution = function(data){
 		if(data.length > 0){//check for data is there or not
-			if(data[0]['ProjectNo']){//check if project no is there in the json or not
-				if(parseInt(data[0]['ProjectNo']) !== +$scope.currentProjectNo){// if project changed ..set to default
-					$scope.currentProjectAverageRatingTrend = [];
-					$scope.currentProjectNo = parseInt(data[0]['ProjectNo']);
-				}
+//			$scope.currentProjectVotingDistribution = data;
+			var tempVotingDistribution = [
+			   			               { Rating: '1', Count: 0 },
+						               { Rating: '2', Count: 0 },
+						               { Rating: '3', Count: 0 },
+						               { Rating: '4', Count: 0 },
+						               { Rating: '5', Count: 0 } 
+						               ]; 
+			
+			data = data.sort(function (a,b) {return parseInt(a.Rating) - parseInt(b.Rating)});
+			for ( var i = 0; i < data.length; i++) {
+				
+				tempVotingDistribution[parseInt(data[i]['Rating']) - 1]['Count'] = parseInt(data[i]['Count']); 
 			}
-			$scope.currentProjectVotingDistribution = data;
-			/*if (data[0]['AverageRating']) {
-				$scope.currentProjectAverageRatingTrend.push({
-					"Time":new Date(),
-					"Rating":data[0]['AverageRating']
-				});		
-			}*/
+			$scope.currentProjectVotingDistribution = tempVotingDistribution;
+			
 		}
 	};
 	
