@@ -98,7 +98,6 @@ app.directive('tpPieTrend', [ function() {
 				
 		         legend.data(data);
 		         
-		         
 		         legend.select('rect')                                     // NEW
 		           .style('fill', function (d,i) { return color[i]})                                   // NEW
 		           .style('stroke', function(d,i){return color[i]});                                // NEW
