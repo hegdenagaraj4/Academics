@@ -15,6 +15,9 @@ function resultsController(http,interval,$scope,technophiliaService){
 	             ];
 	$scope.leaders = {};
 	var recallInterval = 3000;
+	$scope.var1 = true;
+	$scope.var2 = true;
+	$scope.var3 = true;
 	
 	$scope.currentProjectAverageRatingTrend = [];
 	$scope.currentProjectVotingDistribution = [];
@@ -40,6 +43,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 		});
 	};
 	$scope.fetchDataForGlobalDistribution = function(){
+		$scope.var1 = false;
 		return technophiliaService.fetchDataForGlobalDistribution().then(function success(response){
 			$scope.prepareDataForBarChart(response.data);
 			$scope.getLeaders($scope.myData,5);
@@ -70,6 +74,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 	};
 	
 	$scope.fetchCurrentProjectAverageRating = function(){
+		$scope.var2 = false;
 		return technophiliaService.fetchCurrentProjectAverageRating().then(function success(response){
 			$scope.prepareDataForTrendLine(response.data);
 			
@@ -79,39 +84,54 @@ function resultsController(http,interval,$scope,technophiliaService){
 	};
 	
 	$scope.prepareDataForVotingDistribution = function(data){
-		if(data.length > 0){//check for data is there or not
-//			$scope.currentProjectVotingDistribution = data;
-			var tempVotingDistribution = [
+		var tempVotingDistribution = [
+			   			               { Rating: '0', Count: 0 },
 			   			               { Rating: '1', Count: 0 },
-						               { Rating: '2', Count: 0 },
-						               { Rating: '3', Count: 0 },
-						               { Rating: '4', Count: 0 },
-						               { Rating: '5', Count: 0 } 
+			   			               { Rating: '2', Count: 0 },
+			   			               { Rating: '3', Count: 0 },
+						               { Rating: '4', Count: 0 }
 						               ]; 
-			
+		if(data.length > 0){//check for data is there or not
 			data = data.sort(function (a,b) {return parseInt(a.Rating) - parseInt(b.Rating)});
 			for ( var i = 0; i < data.length; i++) {
 				
-				tempVotingDistribution[parseInt(data[i]['Rating']) - 1]['Count'] = parseInt(data[i]['Count']); 
+				tempVotingDistribution[parseInt(data[i]['Rating'])]['Count'] = parseInt(data[i]['Count']); 
 			}
 			$scope.currentProjectVotingDistribution = tempVotingDistribution;
-			
+		}
+		else{
+			$scope.currentProjectVotingDistribution = tempVotingDistribution;
 		}
 	};
 	
 	$scope.fetchCurrentProjectVotingDistribution = function(){
+		$scope.var3 = false;
 		return technophiliaService.fetchCurrentProjectVotingDistibution().then(function success(response){
-			$scope.prepareDataForVotingDistribution(response.data);			
+			$scope.prepareDataForVotingDistribution(response.data);	
 		},function failure(response){
 			console.log("error");
 		});
 	};
+	$scope.executeAllFunctions = function (){
+		
+		if($scope.var1 && $scope.var2 && $scope.var3){
+			$scope.fetchDataForGlobalDistribution().then(function success(){
+				$scope.var1 = true;				
+			});
+			$scope.fetchCurrentProjectAverageRating().then(function success(){
+				$scope.var2 = true;				
+			});
+			$scope.fetchCurrentProjectVotingDistribution().then(function success(){
+				$scope.var3 = true;				
+			});
+		}
+		};
 	
 	
 	(function Initalize(){
 		$scope.dataFetched = false;
 		$scope.liveResultsPagePathName = "/results.html";
-		$scope.fetchDataForGlobalDistribution().then(
+		/*$scope.fetchDataForGlobalDistribution().then(
 			function success(response){
 				$scope.dataFetched = true;
 				},
@@ -122,12 +142,15 @@ function resultsController(http,interval,$scope,technophiliaService){
 				function success(response){
 					$scope.dataRatingFetched = true;
 					},
-				function failure(response){console.log(response)});
+				function failure(response){console.log(response)});*/
+		
+		interval($scope.executeAllFunctions,recallInterval);
+		
 		
 		if(location.pathname === $scope.liveResultsPagePathName){
-			interval($scope.fetchDataForGlobalDistribution,recallInterval);
+			/*interval($scope.fetchDataForGlobalDistribution,recallInterval);
 			interval($scope.fetchCurrentProjectAverageRating,recallInterval);
-			interval($scope.fetchCurrentProjectVotingDistribution,recallInterval);
+			interval($scope.fetchCurrentProjectVotingDistribution,recallInterval);*/
 		}
 	})();
 }

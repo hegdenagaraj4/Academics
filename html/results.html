@@ -17,26 +17,34 @@
 		<link rel="stylesheet" href="UIScripts/css/app.css">
 	</head>
 	<meta charset="utf-8">
-	<body ng-controller="resultsController" style="background-color:#E7EAB3">
+	<body ng-controller="resultsController" style="background-color:white">
 		<div class ="row" id="tophalf">
 			<div class="row">
 			  <div class="small-2 small-centered columns chartLabel" style="text-align:center">
 			  	Team {{currentProjectNo}}
 			  </div>
 			</div>
+			
 			<div id="trend" class="large-6 columns">
-				<tp-line-trend data='currentProjectAverageRatingTrend'></tp-line-trend>
+				<div style="background: #e4e4e4;">
+					<tp-line-trend data='currentProjectAverageRatingTrend'></tp-line-trend>
+				</div>
 			</div>
 			<div id="piechart" class="large-6 columns">
-				<tp-pie-trend data='currentProjectVotingDistribution'></tp-pie-trend>
+				<div style="background: #e4e4e4;">
+					<tp-pie-trend data='currentProjectVotingDistribution'></tp-pie-trend>
+				</div>
 			</div>
 		</div>
-		<div id="barChart" class="row">
-			<div class="col-centered">
-				<cr-d3-bars ng-show="dataFetched" data='myData'></cr-d3-bars>
+		<div id="barChart" class="row" style="margin-top:20px;padding: 0 15px 0 15px">
+			<div class="large-12 col-centered">
+			<div style="background: #e4e4e4;">
+				<cr-d3-bars ng-show="true" data='myData'></cr-d3-bars>
+			</div>
+				
 				<div class="row">
-				  <div class="small-2 small-centered columns chartLabel" style="text-align:center">
-				  	Votes Distribution
+				  <div class="small-4 small-centered columns chartLabel" style="text-align:center">
+				  	Global Votes Distribution
 				  </div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 <?php
-	require_once 'connect.php';
+// 	require_once 'connect.php';
+	require_once 'connectdeploy.php';
 	$query = 'select avg(Rating) as averageRating from Votes';
 	$result = mysql_query($query) or die(mysql_error());
 	$averageRating = mysql_fetch_array($result)[0];

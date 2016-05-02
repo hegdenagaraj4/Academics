@@ -1,6 +1,8 @@
 <?php
 	require_once 'connect.php';
-	$query = 'select avg(rating) as averageRating from Rating';
+// 	require_once 'connectdeploy.php';
+	
+	$query = 'select avg(rating) as averageRating from rating';
 	$result = mysql_query($query) or die(mysql_error());
 	$averageRating = mysql_fetch_array($result)[0];
 // 	echo $averageRating;
@@ -9,7 +11,7 @@
 	$thresholdNumberOfVotes = 10;
 	$sql = "SELECT P.project_id as ProjectNo,P.project_name as ProjectName, avg(R.rating) as AverageRating,count(R.rating) as Voters,
 	((avg(R.rating) * count(R.rating) + $averageRating * $thresholdNumberOfVotes)/($thresholdNumberOfVotes+count(R.rating))) as Rating FROM
-	  Project as P left join Rating as R on P.project_id=R.project_id group by P.project_id";
+	  project as P left join rating as R on P.project_id=R.project_id group by P.project_id";
 	$result = mysql_query($sql) or die(mysql_error());
 	
 	$rows = array();

@@ -8,10 +8,11 @@ app.directive( 'crD3Bars', [
       link: function (scope, element) {
     	  
         var margin = {top: 20, right: 20, bottom: 30, left: 60},
-          width = 960 - margin.left - margin.right,
+          width = 1160 - margin.left - margin.right,
           height = 360 - margin.top - margin.bottom;
 		
-		var colors = ["#004445", "#6fb98f","#2c7873"];
+//		var colors = ["#004445", "#6fb98f","#2c7873"];
+		var colors = ['steelblue'];
 	    var color = d3.scale.ordinal().range(colors);
                   
         var svg = d3.select(element[0])
@@ -27,7 +28,7 @@ app.directive( 'crD3Bars', [
         var barPadding = 0.2;
         var outerPadding = 0.3;
         
-        var x = d3.scale.ordinal().rangeRoundBands([0, width],.3,0.4);
+        var x = d3.scale.ordinal().rangeRoundBands([0, width],.5,0.4);
         var y = d3.scale.linear().range([height, 0]);
 
         var xAxis = d3.svg.axis()

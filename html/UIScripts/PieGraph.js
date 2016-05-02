@@ -7,11 +7,11 @@ app.directive('tpPieTrend', [ function() {
 		link : function(scope, element) {
 
 		var dataset = [
-		               { Rating: '1', Count: 0 },
-		               { Rating: '2', Count: 0 },
-		               { Rating: '3', Count: 0 },
-		               { Rating: '4', Count: 0 },
-		               { Rating: '5', Count: 0 } 
+						{ Rating: '4', Count: 0 },
+						{ Rating: '3', Count: 0 },
+						{ Rating: '2', Count: 0 },
+						{ Rating: '1', Count: 0 },
+						{ Rating: '0', Count: 0 },
 		               ];
          var width = 600;
          var height = 270;
@@ -20,14 +20,14 @@ app.directive('tpPieTrend', [ function() {
          var legendRectSize = 18;                                  
          var legendSpacing = 4;                                    
          
-         var color = ['red','blue','yellow','black','green'];
+         var color = ['rgb(251,224,35)','rgb(153,220,38)','rgb(247,146,33)','rgb(253,53,30)','rgb(76,162,222)'];
          
-         var imagelocations = ['UIScripts/images/emoticonsRating1.png',
-                               'UIScripts/images/emoticonsRating2.png',
-                               'UIScripts/images/emoticonsRating3.png',
-                               'UIScripts/images/emoticonsRating4.png',
-                               'UIScripts/images/emoticonsRating5.png'
-                               ];
+         var imagelocations = ['UIScripts/images/emoticonsRating0.png',
+			                      'UIScripts/images/emoticonsRating1.png',
+	                               'UIScripts/images/emoticonsRating2.png',
+	                               'UIScripts/images/emoticonsRating3.png',
+	                               'UIScripts/images/emoticonsRating4.png'
+	                               ];
          var svg = d3.select(element[0])
          	.append('svg')
            .attr('width', width)
@@ -104,7 +104,7 @@ app.directive('tpPieTrend', [ function() {
 		           
 		         legend.select('image')                                     // NEW
 //		           .text(function(d) { return d.Rating; });                       // NEW
-		         .attr("xlink:href", function (d,i){return imagelocations[0]});
+		         .attr("xlink:href", function (d,i){return imagelocations[parseInt(d.Rating)]});
 
 			};
 			scope.$watch('data', function() {

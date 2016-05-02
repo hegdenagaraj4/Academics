@@ -6,16 +6,16 @@ app.directive('tpLineTrend', [ function() {
 		},
 		link : function(scope, element) {
 
-			var imagelocations = ['UIScripts/images/emoticonsRating1.png',
+			var imagelocations = ['UIScripts/images/emoticonsRating0.png',
+			                      'UIScripts/images/emoticonsRating1.png',
 	                               'UIScripts/images/emoticonsRating2.png',
 	                               'UIScripts/images/emoticonsRating3.png',
-	                               'UIScripts/images/emoticonsRating4.png',
-	                               'UIScripts/images/emoticonsRating5.png'
+	                               'UIScripts/images/emoticonsRating4.png'
 	                               ];
 			
 			var margin = {
 				top : 30,
-				right : 20,
+				right : 35,
 				bottom : 30,
 				left : 60
 				}, width = 600 - margin.left - margin.right, height = 270
@@ -37,8 +37,8 @@ app.directive('tpLineTrend', [ function() {
 			var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(
 					d3.time.format("%M:%S")).ticks(5);
 			
-			y.domain([ 0, 5 ]);
-			var yAxis = d3.svg.axis().scale(y).orient("left").ticks(6);
+			y.domain([ 0, 4 ]);
+			var yAxis = d3.svg.axis().scale(y).orient("left").ticks(5);
 
 			// Y axis
 			svg.append("g").attr("class", "trendlineYAxis axis").call(yAxis);
@@ -47,12 +47,14 @@ app.directive('tpLineTrend', [ function() {
 			
 			trendlineYAxis.selectAll("text").remove();
 			
-			trendlineYAxis.selectAll(".tick").filter(function (d){return d!==0}).append("image")
+			trendlineYAxis.selectAll(".tick")
+//			.filter(function (d){return d!==0})
+			.append("image")
 			.attr("width",20)
 			.attr("height",20)
 			.attr("x",-30)
 			.attr("y",-10)
-			.attr("xlink:href", function (d,i){return imagelocations[0]});
+			.attr("xlink:href", function (d,i){return imagelocations[i]});
 			
 			svg.select(".trendlineYAxis").append("text")
 				.attr("transform","translate(-40," + height / 2 + ") rotate(-90) ")

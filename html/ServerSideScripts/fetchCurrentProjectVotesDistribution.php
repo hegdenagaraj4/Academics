@@ -1,22 +1,50 @@
 <?php
 	require_once 'connect.php';
-	$query = "select * from Project where Status='1'";
+// 	require_once 'connectdeploy.php';
+	
+	/* $query = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED" ;
+	$result = mysql_query($query) or die(mysql_error()); */
+	
+//	echo $result;
+	
+	$query = "select * from project where Status='1'";
 	$result = mysql_query($query) or die(mysql_error());
+	
+	//echo $result.'eqwe';
+	
+	/* $query = "commit";
+	$result1 = mysql_query($query) or die(mysql_error()); */
+	
+	//echo $result1.'faasafs';
+	
 	$rows = array();
 	while($r = mysql_fetch_assoc($result)) {
 		$rows[] = $r;
 	}
  	$currentProjectNumber = $rows[0]['project_id'];
  	
- 	//SELECT ProjectNo,rating,count(*) as PerRatingCount FROM `Votes` WHERE projectno='10' group by rating
+/*  	$query = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED" ;
+ 	$result = mysql_query($query) or die(mysql_error()); */
+ 	
+ 	//echo $result;
+ 	
  	$query = "select P.project_id as ProjectNo,P.project_name as ProjectName,R.rating as Rating
  	,count(*) as Count from 
- 	Rating as R join Project as P on P.project_id=R.project_id where P.project_id='$currentProjectNumber' 
+ 	rating as R join project as P on P.project_id=R.project_id where P.project_id='$currentProjectNumber' 
  	group by R.rating";
+ 	$resulttobereturned = mysql_query($query) or die(mysql_error());
  	
- 	$result = mysql_query($query) or die(mysql_error());
+ 	//echo $result.'eqwe';
+ 	
+ 	
+ 	/* $query = "commit";
+ 	$result1 = mysql_query($query) or die(mysql_error());
+ */ 	
+ 	//echo $result1.'faasafs';
+ 	
+ 
  	$rows = array();
- 	while($r = mysql_fetch_assoc($result)) {
+ 	while($r = mysql_fetch_assoc($resulttobereturned)) {
  		$rows[] = $r;
  	}
  	
