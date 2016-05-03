@@ -59,7 +59,7 @@ app.directive('tpLineTrend', [ function() {
 			svg.select(".trendlineYAxis").append("text")
 				.attr("transform","translate(-40," + height / 2 + ") rotate(-90) ")
 //				.attr("y", 6).attr("dy",".71em")
-				.style("text-anchor", "Middle").text("Rating Trend");
+				.style("text-anchor", "Middle").text("Rating");
 			
 			// X axis
 			// #763626

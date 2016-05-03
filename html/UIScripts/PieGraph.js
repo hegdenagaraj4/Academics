@@ -13,8 +13,16 @@ app.directive('tpPieTrend', [ function() {
 						{ Rating: '1', Count: 0 },
 						{ Rating: '0', Count: 0 },
 		               ];
-         var width = 600;
-         var height = 270;
+		
+		var margin = {
+				top : 10,
+				right : 10,
+				bottom : 10,
+				left : 30
+				}, width = 600 - margin.left - margin.right, height = 270
+					- margin.top - margin.bottom;
+         /*var width = 600;
+         var height = 270;*/
          var radius = Math.min(width, height) / 2;
          var donutWidth = 75;
          var legendRectSize = 18;                                  
@@ -29,12 +37,12 @@ app.directive('tpPieTrend', [ function() {
 	                               'UIScripts/images/emoticonsRating4.png'
 	                               ];
          var svg = d3.select(element[0])
-         	.append('svg')
-           .attr('width', width)
-           .attr('height', height)
+         	.append('svg') 
+           .attr('width', width + margin.left + margin.right)
+           .attr('height', height + margin.top + margin.bottom)
            .append('g')
-           .attr('transform', 'translate(' + (width / 2) + 
-             ',' + (height / 2) + ')');
+           .attr('transform', 'translate(' + ((width) / 2) + 
+             ',' + ((height + margin.top + margin.bottom) / 2) + ')');
          
          var arc = d3.svg.arc()
            .innerRadius(radius - donutWidth)
@@ -64,7 +72,7 @@ app.directive('tpPieTrend', [ function() {
 		             var offset =  height * color.length / 2;     // NEW
 		             var horz = -2 * legendRectSize;                       // NEW
 		             var vert = i * height - offset;                       // NEW
-		             return 'translate(' + width/4 + ',' + vert + ')';        // NEW
+		             return 'translate(' + width/3 + ',' + vert + ')';        // NEW
 		           }); 
        
          
