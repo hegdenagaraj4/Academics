@@ -19,7 +19,7 @@ app.directive('tpPieTrend', [ function() {
 				right : 10,
 				bottom : 10,
 				left : 30
-				}, width = 600 - margin.left - margin.right, height = 270
+				}, width = 600 - margin.left - margin.right, height = 265
 					- margin.top - margin.bottom;
          /*var width = 600;
          var height = 270;*/

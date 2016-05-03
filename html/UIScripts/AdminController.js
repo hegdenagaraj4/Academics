@@ -14,6 +14,37 @@ function adminController($scope,technophiliaService){
 		);
 	};
 	
+	$scope.startTechnophilia = function(){
+		$scope.status = null;
+		
+		if($scope.validationText && $scope.validationText.toLowerCase() === "ok"){
+			$scope.validationText = null;
+			technophiliaService.startTechnophilia().then(
+					function success(response){
+						$scope.status = "ready to Go!!"; 
+					},
+					function failure(response){
+						$scope.status = "error" + response.status;
+					}
+				);
+		}else{
+			$scope.status = "password is 'ok'";
+		}
+		
+	};
+	$scope.deactivateAllProjects = function(){
+		$scope.status = null;
+		technophiliaService.deactivateAllProjects().then(
+			function success(response){
+				$scope.status = "ho gaya bhai ho gaya khatam !!!";
+			},
+			function failure(response){
+				$scope.status = "error" + response.status;
+			}
+		);
+	};
+	
+	
 	$scope.allProjects = {};
 	(function getProjects(){
 		technophiliaService.fetchAllProjects().then(

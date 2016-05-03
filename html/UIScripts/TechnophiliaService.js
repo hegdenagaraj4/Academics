@@ -20,6 +20,12 @@ function technophiliaService(http){
 				url: 'ServerSideScripts/updateCurrentProject.php',
 				params:{'currentProject':currentProject}
 			}); 
+		},
+		deactivateAllProjects:function(){
+			return http({method:'GET',url: 'ServerSideScripts/deactivateAllProjects.php'});
+		},
+		startTechnophilia:function(){
+			return http({method:'GET',url: 'ServerSideScripts/startTechnophilia.php'});
 		}
 	};
 	

@@ -14,7 +14,7 @@
 	</head>
 	<meta charset="utf-8">
 	<body ng-controller="resultsController" style="background-color:#E7EAB3">
-		<div class = "row" ng-show="dataRatingFetched" id="tophalf">
+		<div class = "row" ng-show="true" id="tophalf">
 			 <div id="leaderboard" class="large-10 columns small-centered">
 				<div class="row">
 				  <div class="small-4 small-centered columns chartLabel" style="text-align:center">
@@ -43,7 +43,7 @@
 		</div>
 		<div id="barChart" class="row">
 			<div class="col-centered">
-				<cr-d3-bars ng-show="dataFetched" data='myData'></cr-d3-bars>
+				<cr-d3-bars ng-show="true" data='myData'></cr-d3-bars>
 				<div class="row">
 				  <div class="small-2 small-centered columns chartLabel" style="text-align:center">
 				  	Votes Distribution

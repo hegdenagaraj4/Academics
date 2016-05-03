@@ -18,7 +18,7 @@ app.directive('tpLineTrend', [ function() {
 				right : 35,
 				bottom : 20,
 				left : 60
-				}, width = 600 - margin.left - margin.right, height = 270
+				}, width = 600 - margin.left - margin.right, height = 265
 					- margin.top - margin.bottom;
 
 			// Adds the svg canvas

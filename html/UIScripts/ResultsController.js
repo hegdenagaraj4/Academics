@@ -33,14 +33,16 @@ function resultsController(http,interval,$scope,technophiliaService){
 	};
 	$scope.getLeaders = function(data,numberOfLeaders){
 		var copiedJsonData = JSON.parse(JSON.stringify(data));//cloning the object to not modify the model variable
-		$scope.leaders = copiedJsonData.sort(function sorting(a,b){
-			if(parseFloat(b.Rating) === parseFloat(a.Rating)){
-				return parseInt(b.Voters) - parseInt(a.Voters);
-			}
-			return parseFloat(b.Rating) - parseFloat(a.Rating);//descending
-		}).slice(0,numberOfLeaders).filter(function removeNotVotedTeams(json){//filtering out non voted teams
-			return parseFloat(json.Rating) > 0;
-		});
+		
+			$scope.leaders = copiedJsonData.sort(function sorting(a,b){
+				if(parseFloat(b.Rating) === parseFloat(a.Rating)){
+					return parseInt(b.Voters) - parseInt(a.Voters);
+				}
+				return parseFloat(b.Rating) - parseFloat(a.Rating);//descending
+			}).slice(0,numberOfLeaders).filter(function removeNotVotedTeams(json){//filtering out non voted teams
+				return parseFloat(json.Rating) >= 0;
+			});
+		
 	};
 	$scope.fetchDataForGlobalDistribution = function(){
 		$scope.var1 = false;
@@ -48,28 +50,28 @@ function resultsController(http,interval,$scope,technophiliaService){
 			$scope.prepareDataForBarChart(response.data);
 			$scope.getLeaders($scope.myData,5);
 		},function failure(response){
-			console.log("error");
+			console.log(response);
 		});
 	};
 	
 	$scope.prepareDataForTrendLine = function(data){
 		if(data.length > 0){//check for data is there or not
-			if(data[0]['ProjectNo']){//check if project no is there in the json or not
-				if(parseInt(data[0]['ProjectNo']) !== +$scope.currentProjectNo){// if project changed ..set to default
-					$scope.currentProjectAverageRatingTrend = [];
-					$scope.currentProjectNo = parseInt(data[0]['ProjectNo']);
-				}
-			}else{
+			if(data[0]['ProjectNo'] === null)
+				$scope.currentProjectNo = null;
+			else
+				$scope.currentProjectNo = parseInt(data[0]['ProjectNo']);
+			
+			if(data[0]['ProjectNo'] && parseInt(data[0]['ProjectNo']) !== +$scope.currentProjectNo){//check if project no is there in the json or not
 				$scope.currentProjectAverageRatingTrend = [];
 			}
 				
-			
 			if (data[0]['AverageRating']) {
 				$scope.currentProjectAverageRatingTrend.push({
 					"Time":new Date(),
 					"Rating":data[0]['AverageRating']
 				});		
-			}
+			}else
+				$scope.currentProjectAverageRatingTrend = [];
 		}
 	};
 	

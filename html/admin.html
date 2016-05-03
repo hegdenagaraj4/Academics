@@ -13,22 +13,35 @@
 			<div class="row">
 			{{status}}
 			</div>
-		
-			<div class="small-3 columns">
-			    <select name="projectsDropDown" ng-model="currentProject">
-			      <option ng-repeat="project in allProjects" value="{{project.project_id}}">{{project.project_name}}</option>
-			    </select>
-	    	</div>
-    
-    		
-		<div class="small-9 columns">
-		<input type="button" value="Set" ng-click=updateCurrentTeam()></input>
-		</div>
-		
+			<div class="row">
+				<div class="small-3 columns">
+				    <select name="projectsDropDown" ng-model="currentProject">
+				      <option ng-repeat="project in allProjects" value="{{project.project_id}}">{{project.project_name}}</option>
+				    </select>
+		    	</div>
+	    
+	    		
+				<div class="small-9 columns">
+				<input type="button" value="Set" ng-click=updateCurrentTeam()></input>
+				</div>
+				
+			</div>
+				
 		<div class="row">
 			{{currentFetchedProject}}
-			</div>
+		</div>
 	
+		<div class="row" style="margin-top:500px">
+			<div class="small-2 columns" ">
+				<input type="text" ng-model=validationText></input>
+			</div>
+			<div class="small-3 columns">
+				<input type="button" value="Start Technophilia2016" ng-click=startTechnophilia()></input>
+			</div>
+			<div class="small-7 columns" style="float:right;">
+				<input type="button" value="End Technophilia2016" ng-click=deactivateAllProjects()></input>
+			</div>
+		</div>
 		
 		</div>
 	</body>
