@@ -16,7 +16,7 @@ app.directive('tpLineTrend', [ function() {
 			var margin = {
 				top : 10,
 				right : 35,
-				bottom : 30,
+				bottom : 20,
 				left : 60
 				}, width = 600 - margin.left - margin.right, height = 270
 					- margin.top - margin.bottom;
@@ -50,8 +50,8 @@ app.directive('tpLineTrend', [ function() {
 			trendlineYAxis.selectAll(".tick")
 //			.filter(function (d){return d!==0})
 			.append("image")
-			.attr("width",20)
-			.attr("height",20)
+			.attr("width",25)
+			.attr("height",25)
 			.attr("x",-30)
 			.attr("y",-10)
 			.attr("xlink:href", function (d,i){return imagelocations[i]});

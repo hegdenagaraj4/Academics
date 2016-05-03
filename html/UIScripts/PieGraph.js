@@ -85,8 +85,8 @@ app.directive('tpPieTrend', [ function() {
        legend.append('image')                                     // NEW
          .attr('x', legendRectSize + legendSpacing)              // NEW
          .attr('y', 20 - legendRectSize - legendSpacing)
-   		 .attr("width", 20)
-   		 .attr("height", 20);
+   		 .attr("width", 25)
+   		 .attr("height", 25);
        
 			scope.render = function(data){
 								
