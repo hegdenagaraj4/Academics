@@ -7,9 +7,9 @@ app.directive( 'crD3Bars', [
       },
       link: function (scope, element) {
     	  
-        var margin = {top: 20, right: 20, bottom: 30, left: 60},
+        var margin = {top: 10, right: 20, bottom: 30, left: 60},
           width = 1160 - margin.left - margin.right,
-          height = 360 - margin.top - margin.bottom;
+          height = 350 - margin.top - margin.bottom;
 		
 //		var colors = ["#004445", "#6fb98f","#2c7873"];
 		var colors = ['steelblue'];

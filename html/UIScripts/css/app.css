@@ -20,6 +20,7 @@
 }
 
 .chartLabel{
+	padding-top:5px;
 	 font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 	 /* font-weight: bold; */
 	 /* font-size: 20px; */
@@ -27,7 +28,6 @@
 
 #tophalf {
 	padding-top: 10px;
-	/* margin-top: 20px; */
 }
 
 #leaderboard th,td{
@@ -50,3 +50,7 @@
 #leaderboard table{
 	color:white;
 }
+
+#tophalfcontainer,
+#barChartcontainer{
+	box-shadow: 1px 1px 5px steelblue;}

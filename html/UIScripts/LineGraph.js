@@ -14,7 +14,7 @@ app.directive('tpLineTrend', [ function() {
 	                               ];
 			
 			var margin = {
-				top : 30,
+				top : 10,
 				right : 35,
 				bottom : 30,
 				left : 60

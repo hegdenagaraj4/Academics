@@ -72,7 +72,7 @@ app.directive('tpPieTrend', [ function() {
 		             var offset =  height * color.length / 2;     // NEW
 		             var horz = -2 * legendRectSize;                       // NEW
 		             var vert = i * height - offset;                       // NEW
-		             return 'translate(' + width/3 + ',' + vert + ')';        // NEW
+		             return 'translate(' + -width/2.5 + ',' + vert + ')';        // NEW
 		           }); 
        
          

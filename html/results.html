@@ -18,50 +18,40 @@
 </head>
 <meta charset="utf-8">
 <body ng-controller="resultsController" style="background-color: white">
-	<div class="row" id="tophalf">
-		<div class="row">
-			<div class="small-2 small-centered columns chartLabel"
-				style="text-align: center">Team {{currentProjectNo}}</div>
-		</div>
 
-		<div id="trend" class="large-6 columns">
-			<div class="large-12 col-centered" style="background: #e4e4e4;">
-				<div>
-					<tp-line-trend data='currentProjectAverageRatingTrend'></tp-line-trend>
-				</div>
-				<div class="small-2 small-centered chartLabel"
-					style="text-align: center">Voting Trend</div>
-
+	<div id="tophalf" class="row" style="padding: 15px 15px 0 15px">
+		<div id="tophalfcontainer" class="large-12 columns col-centered" style="background: #e4e4e4;padding-left:0px">
+			<div class="small-4 small-centered chartLabel" style="text-align: center">Team {{currentProjectNo}}</div>
+			
+			<div class="large-6 columns">
+				<tp-pie-trend data='currentProjectVotingDistribution'></tp-pie-trend>
+				<div class="small-3 small-centered" style="text-align: center">Voting Pie</div>
 			</div>
-		</div>
-		<div id="piechart" class="large-6 columns">
-			<div class="large-12 col-centered" style="background: #e4e4e4;">
-				<div style="background: #e4e4e4;">
-					<tp-pie-trend data='currentProjectVotingDistribution'></tp-pie-trend>
-				</div>
-				<div class="small-2 small-centered chartLabel"
-					style="text-align: center">Voting Pie</div>
+			<div class="large-6 columns">
+				<tp-line-trend data='currentProjectAverageRatingTrend'></tp-line-trend>
+				<div class="small-3 small-centered " style="text-align: center">Rating Trend</div>
 			</div>
 		</div>
 	</div>
-	<div id="barChart" class="row"	style="padding: 10px 15px 0 15px">
-		<div class="large-12 col-centered" style="background: #e4e4e4;">
+
+	<div id="barChart" class="row" style="padding: 15px 15px 0 15px">
+		<div id="barChartcontainer" class="large-12 col-centered" style="background: #e4e4e4;padding-left:15px">
+			<div class="small-4 small-centered chartLabel" style="text-align: center">Global Votes Distribution</div>
 			<div>
 				<cr-d3-bars ng-show="true" data='myData'></cr-d3-bars>
 			</div>
-
-			<div class="small-2 small-centered chartLabel"
-				style="text-align: center">Global Votes Distribution</div>
 		</div>
 	</div>
-	
+
 	<div id="votingBar" class="row" style="padding: 10px 15px 0 15px">
-		<div class="large-12 col-centered" style="background: #e4e4e4;">
-			<div class="small-2 small-centered chartLabel"
-				style="text-align: center">Global Votes Distribution
+		<div class="large-12 col-centered"
+			style="background: rgb(247, 146, 33);">
+			<div class="small-8 small-centered"
+				style="text-align: center;">
+				Vote Now @ <a href="#" style="color: #140C78; font-size: 22px">http://tiny.cc/t16</a>
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>
