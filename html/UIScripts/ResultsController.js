@@ -13,7 +13,9 @@ function resultsController(http,interval,$scope,technophiliaService){
 	                 {ProjectNo: '17', Rating: 0},{ProjectNo: '18', Rating: 0},
 	                 {ProjectNo: '19', Rating: 0},{ProjectNo: '20', Rating: 0}
 	             ];
+	
 	$scope.leaders = {};
+	
 	var recallInterval = 3000;
 	$scope.var1 = true;
 	$scope.var2 = true;
@@ -50,28 +52,26 @@ function resultsController(http,interval,$scope,technophiliaService){
 			$scope.prepareDataForBarChart(response.data);
 			$scope.getLeaders($scope.myData,5);
 		},function failure(response){
-			console.log(response);
+			console.log("error in " + fetchDataForGlobalDistribution);
 		});
 	};
 	
 	$scope.prepareDataForTrendLine = function(data){
 		if(data.length > 0){//check for data is there or not
-			if(data[0]['ProjectNo'] === null)
+			if(data[0]['ProjectNo'] === null){
 				$scope.currentProjectNo = null;
-			else
-				$scope.currentProjectNo = parseInt(data[0]['ProjectNo']);
-			
-			if(data[0]['ProjectNo'] && parseInt(data[0]['ProjectNo']) !== +$scope.currentProjectNo){//check if project no is there in the json or not
 				$scope.currentProjectAverageRatingTrend = [];
 			}
-				
+			if(data[0]['ProjectNo'] && (parseInt(data[0]['ProjectNo']) !== +$scope.currentProjectNo)){//check if project no is there in the json or not
+				$scope.currentProjectAverageRatingTrend = [];
+				$scope.currentProjectNo = parseInt(data[0]['ProjectNo']);
+			}
 			if (data[0]['AverageRating']) {
 				$scope.currentProjectAverageRatingTrend.push({
 					"Time":new Date(),
 					"Rating":data[0]['AverageRating']
 				});		
-			}else
-				$scope.currentProjectAverageRatingTrend = [];
+			}
 		}
 	};
 	
@@ -81,7 +81,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 			$scope.prepareDataForTrendLine(response.data);
 			
 		},function failure(response){
-			console.log("error");
+			console.log("error in fetchCurrentProjectAverageRating");
 		});
 	};
 	
@@ -111,7 +111,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 		return technophiliaService.fetchCurrentProjectVotingDistibution().then(function success(response){
 			$scope.prepareDataForVotingDistribution(response.data);	
 		},function failure(response){
-			console.log("error");
+			console.log("error in " + fetchCurrentProjectVotingDistribution);
 		});
 	};
 	$scope.executeAllFunctions = function (){
@@ -133,26 +133,12 @@ function resultsController(http,interval,$scope,technophiliaService){
 	(function Initalize(){
 		$scope.dataFetched = false;
 		$scope.liveResultsPagePathName = "/results.html";
-		/*$scope.fetchDataForGlobalDistribution().then(
-			function success(response){
-				$scope.dataFetched = true;
-				},
-			function failure(response){console.log(response)});
-		
-		
-		$scope.fetchCurrentProjectAverageRating().then(
-				function success(response){
-					$scope.dataRatingFetched = true;
-					},
-				function failure(response){console.log(response)});*/
-		
 		interval($scope.executeAllFunctions,recallInterval);
 		
-		
-		if(location.pathname === $scope.liveResultsPagePathName){
-			/*interval($scope.fetchDataForGlobalDistribution,recallInterval);
+		/*if(location.pathname === $scope.liveResultsPagePathName){
+			interval($scope.fetchDataForGlobalDistribution,recallInterval);
 			interval($scope.fetchCurrentProjectAverageRating,recallInterval);
-			interval($scope.fetchCurrentProjectVotingDistribution,recallInterval);*/
-		}
+			interval($scope.fetchCurrentProjectVotingDistribution,recallInterval);
+		}*/
 	})();
 }

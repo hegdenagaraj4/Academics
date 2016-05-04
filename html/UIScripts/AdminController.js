@@ -6,10 +6,10 @@ function adminController($scope,technophiliaService){
 		technophiliaService.updateCurrentProject($scope.currentProject).then(
 			function success(response){
 				$scope.currentFetchedProject = response.data[0]['project_name'];
-				$scope.status = "updated successfully  " + $scope.currentFetchedProject;
+				$scope.status = "Project Updated successfully to " + $scope.currentFetchedProject;
 			},
 			function failure(response){
-				$scope.status = "error" + response.status;
+				$scope.status = response.status  + " " + response.statusText;
 			}
 		);
 	};
@@ -21,45 +21,49 @@ function adminController($scope,technophiliaService){
 			$scope.validationText = null;
 			technophiliaService.startTechnophilia().then(
 					function success(response){
-						$scope.status = "ready to Go!!"; 
+						$scope.status = response.status  + " " + response.statusText;
 					},
 					function failure(response){
-						$scope.status = "error" + response.status;
+						$scope.status = response.status  + " " + response.statusText;
 					}
 				);
 		}else{
-			$scope.status = "password is 'ok'";
+			$scope.status = "Correct password is 'ok'";
 		}
 		
 	};
-	$scope.deactivateAllProjects = function(){
+	$scope.endTechnophilia = function(){
 		$scope.status = null;
-		technophiliaService.deactivateAllProjects().then(
+		technophiliaService.endTechnophilia().then(
 			function success(response){
-				$scope.status = "ho gaya bhai ho gaya khatam !!!";
+				$scope.status = response.status  + " " + response.statusText;
+				$scope.currentFetchedProject = null;
+				$scope.currentProject = null;
 			},
 			function failure(response){
-				$scope.status = "error" + response.status;
+				$scope.status = response.status  + " " + response.statusText;
 			}
 		);
 	};
 	
 	
 	$scope.allProjects = {};
+	
 	(function getProjects(){
+		$scope.status = null;
 		technophiliaService.fetchAllProjects().then(
 			function success(response){
+				$scope.status = response.status  + " " + response.statusText;
 				$scope.allProjects = response.data;
 				for ( var i = 0; i < response.data.length; i++) {
 					if(response.data[i]['Status'] === "1"){
 						$scope.currentFetchedProject = response.data[i]['project_name'];
 						break;
 					}
-						
 				}
 			},
 			function failure(response){
-				console.log(response.data);
+				$scope.status = response.status  + " " + response.statusText;
 			});
 	})();
 }

@@ -8,7 +8,7 @@
 //	echo $result;
 	
 	$query = "select * from project where Status='1'";
-	$result = mysql_query($query) or die(mysql_error());
+	$result = mysql_query($query) or die(header("HTTP/1.1 500 ".mysql_error()));
 	
 	//echo $result.'eqwe';
 	
@@ -22,7 +22,6 @@
 		$rows[] = $r;
 	}
  	$currentProjectNumber = $rows[0]['project_id'];
- 	
 /*  	$query = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED" ;
  	$result = mysql_query($query) or die(mysql_error()); */
  	
@@ -32,7 +31,8 @@
  	,count(*) as Count from 
  	rating as R join project as P on P.project_id=R.project_id where P.project_id='$currentProjectNumber' 
  	group by R.rating";
- 	$resulttobereturned = mysql_query($query) or die(mysql_error());
+ 	
+ 	$result = mysql_query($query) or die(header("HTTP/1.1 500 ".mysql_error()));
  	
  	//echo $result.'eqwe';
  	
@@ -44,9 +44,8 @@
  	
  
  	$rows = array();
- 	while($r = mysql_fetch_assoc($resulttobereturned)) {
+ 	while($r = mysql_fetch_assoc($result)) {
  		$rows[] = $r;
  	}
- 	
 	echo json_encode($rows);
 ?>
