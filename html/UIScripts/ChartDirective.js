@@ -9,10 +9,10 @@ app.directive( 'crD3Bars', [
     	  
         var margin = {top: 10, right: 20, bottom: 30, left: 60},
           width = 1160 - margin.left - margin.right,
-          height = 350 - margin.top - margin.bottom;
+          height = 338 - margin.top - margin.bottom;
 		
 //		var colors = ["#004445", "#6fb98f","#2c7873"];
-		var colors = ['steelblue'];
+		var colors = ['#5895c7'];
 	    var color = d3.scale.ordinal().range(colors);
                   
         var svg = d3.select(element[0])
@@ -51,6 +51,7 @@ app.directive( 'crD3Bars', [
 	        .call(yAxis)
 	      .append("text")
 	        .attr("transform","translate(-45," + height / 2 + ") rotate(-90)")
+	        .attr("class", "chartLabel")
 	        .style("text-anchor", "Middle")
 	        .text("Global Rating");
         
@@ -60,7 +61,7 @@ app.directive( 'crD3Bars', [
           x.domain(data.map(function(d) { return d.ProjectNo; }));
           var min = d3.min(data, function(d) { return d.Rating; });
           var max = d3.max(data, function(d) { return d.Rating; });
-          y.domain([parseFloat(min),parseFloat(max) + 0.09]);
+          y.domain([parseFloat(min) - 0.09,parseFloat(max) + 0.09]);
           
           //Redraw the axes
 ///          svg.selectAll('g.axis').remove();

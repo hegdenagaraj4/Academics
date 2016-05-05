@@ -17,8 +17,8 @@ app.directive('tpLineTrend', [ function() {
 				top : 10,
 				right : 35,
 				bottom : 20,
-				left : 60
-				}, width = 600 - margin.left - margin.right, height = 265
+				left : 70
+				}, width = 600 - margin.left - margin.right, height = 260
 					- margin.top - margin.bottom;
 
 			// Adds the svg canvas
@@ -37,7 +37,7 @@ app.directive('tpLineTrend', [ function() {
 			var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(
 					d3.time.format("%M:%S")).ticks(5);
 			
-			y.domain([ 0, 4 ]);
+			y.domain([0, 4]);
 			var yAxis = d3.svg.axis().scale(y).orient("left").ticks(5);
 
 			// Y axis
@@ -50,14 +50,14 @@ app.directive('tpLineTrend', [ function() {
 			trendlineYAxis.selectAll(".tick")
 //			.filter(function (d){return d!==0})
 			.append("image")
-			.attr("width",25)
-			.attr("height",25)
-			.attr("x",-30)
-			.attr("y",-10)
+			.attr("width",40)
+			.attr("height",40)
+			.attr("x",-45)
+			.attr("y",-15)
 			.attr("xlink:href", function (d,i){return imagelocations[i]});
 			
 			svg.select(".trendlineYAxis").append("text")
-				.attr("transform","translate(-40," + height / 2 + ") rotate(-90) ")
+				.attr("transform","translate(-50," + height / 2 + ") rotate(-90) ")
 //				.attr("y", 6).attr("dy",".71em")
 				.style("text-anchor", "Middle").text("Rating");
 			

@@ -7,18 +7,16 @@
 		<script type="text/javascript" src="UIScripts/TechnophiliaService.js"></script>
 		<script type="text/javascript" src="UIScripts/ResultsController.js"></script>
 		<script type="text/javascript" src="UIScripts/ChartDirective.js"></script>
-		<script type="text/javascript" src="UIScripts/LineGraph.js"></script>
-		
 		<link rel="stylesheet" href="UIScripts/css/foundation.min.css">
 		<link rel="stylesheet" href="UIScripts/css/app.css">
 	</head>
 	<meta charset="utf-8">
-	<body ng-controller="resultsController" style="background-color:#E7EAB3">
-		<div class = "row" ng-show="true" id="tophalf">
-			 <div id="leaderboard" class="large-10 columns small-centered">
+	<body ng-controller="resultsController" style="background-color:white">
+		<div class = "row" id="tophalf">
+			 <div id="tophalfcontainer" class="columns">
 				<div class="row">
-				  <div class="small-4 small-centered columns chartLabel" style="text-align:center">
-				  	LeaderBoard
+				  <div class="small-4 small-centered columns headLabel" style="text-align:center">
+				  		LeaderBoard
 				  </div>
 				</div> 
 			<table class="table">
@@ -42,13 +40,11 @@
 			</div>
 		</div>
 		<div id="barChart" class="row">
-			<div class="col-centered">
+			<div id="barChartcontainer" class="col-centered">
+			<div class="small-4 small-centered headLabel" style="text-align: center">
+				Global Votes Distribution
+			</div>
 				<cr-d3-bars ng-show="true" data='myData'></cr-d3-bars>
-				<div class="row">
-				  <div class="small-2 small-centered columns chartLabel" style="text-align:center">
-				  	Votes Distribution
-				  </div>
-				</div>
 			</div>
 		</div>		
 	</body>

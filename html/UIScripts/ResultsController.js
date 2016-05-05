@@ -10,8 +10,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 	                 {ProjectNo: '11', Rating: 0},{ProjectNo: '12', Rating: 0},
 	                 {ProjectNo: '13', Rating: 0},{ProjectNo: '14', Rating: 0},
 	                 {ProjectNo: '15', Rating: 0},{ProjectNo: '16', Rating: 0},
-	                 {ProjectNo: '17', Rating: 0},{ProjectNo: '18', Rating: 0},
-	                 {ProjectNo: '19', Rating: 0},{ProjectNo: '20', Rating: 0}
+	                 {ProjectNo: '17', Rating: 0},{ProjectNo: '18', Rating: 0}
 	             ];
 	
 	$scope.leaders = {};
@@ -52,7 +51,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 			$scope.prepareDataForBarChart(response.data);
 			$scope.getLeaders($scope.myData,5);
 		},function failure(response){
-			console.log("error in " + fetchDataForGlobalDistribution);
+			console.log("error in fetchDataForGlobalDistribution");
 		});
 	};
 	
@@ -111,7 +110,7 @@ function resultsController(http,interval,$scope,technophiliaService){
 		return technophiliaService.fetchCurrentProjectVotingDistibution().then(function success(response){
 			$scope.prepareDataForVotingDistribution(response.data);	
 		},function failure(response){
-			console.log("error in " + fetchCurrentProjectVotingDistribution);
+			console.log("error in fetchCurrentProjectVotingDistribution");
 		});
 	};
 	$scope.executeAllFunctions = function (){

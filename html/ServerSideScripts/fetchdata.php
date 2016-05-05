@@ -1,6 +1,6 @@
 <?php
-	require_once 'connect.php';
-// 	require_once 'connectdeploy.php';
+// 	require_once 'connect.php';
+	require_once 'connectdeploy.php';
 	
 	$query = 'select avg(rating) as averageRating from rating';
 	$result = mysql_query($query) or die(header("HTTP/1.1 500 ".mysql_error()));
@@ -21,5 +21,4 @@
 		$rows[] = $r;
 	}
 	echo json_encode($rows);
-		
 ?>

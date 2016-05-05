@@ -19,16 +19,15 @@ app.directive('tpPieTrend', [ function() {
 				right : 10,
 				bottom : 10,
 				left : 30
-				}, width = 600 - margin.left - margin.right, height = 265
+				}, width = 600 - margin.left - margin.right, height = 260
 					- margin.top - margin.bottom;
-         /*var width = 600;
-         var height = 270;*/
+		
          var radius = Math.min(width, height) / 2;
          var donutWidth = 75;
-         var legendRectSize = 18;                                  
-         var legendSpacing = 4;                                    
+         var legendRectSize = 28;                                  
+         var legendSpacing = 14;                                    
          
-         var color = ['rgb(251,224,35)','rgb(153,220,38)','rgb(247,146,33)','rgb(253,53,30)','rgb(76,162,222)'];
+         var color = ['rgb(253,53,30)','rgb(247,146,33)','rgb(251,224,35)','rgb(76,162,222)','rgb(153,220,38)'];
          
          var imagelocations = ['UIScripts/images/emoticonsRating0.png',
 			                      'UIScripts/images/emoticonsRating1.png',
@@ -72,7 +71,7 @@ app.directive('tpPieTrend', [ function() {
 		             var offset =  height * color.length / 2;     // NEW
 		             var horz = -2 * legendRectSize;                       // NEW
 		             var vert = i * height - offset;                       // NEW
-		             return 'translate(' + -width/2.5 + ',' + vert + ')';        // NEW
+		             return 'translate(' + -width/2.1 + ',' + vert + ')';        // NEW
 		           }); 
        
          
@@ -84,9 +83,9 @@ app.directive('tpPieTrend', [ function() {
          
        legend.append('image')                                     // NEW
          .attr('x', legendRectSize + legendSpacing)              // NEW
-         .attr('y', 20 - legendRectSize - legendSpacing)
-   		 .attr("width", 25)
-   		 .attr("height", 25);
+         .attr('y', 35 - legendRectSize - legendSpacing)
+   		 .attr("width", 40)
+   		 .attr("height", 40);
        
 			scope.render = function(data){
 								
