@@ -35,7 +35,7 @@ th,td{
 	text-align:center !important;
 }
 table{
-	height:305px;
+	/* height:305px; */
 	color:black;
 	margin-top:7px;
 }

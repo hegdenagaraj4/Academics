@@ -27,7 +27,7 @@ app.directive('tpPieTrend', [ function() {
          var legendRectSize = 28;                                  
          var legendSpacing = 14;                                    
          
-         var color = ['rgb(253,53,30)','rgb(247,146,33)','rgb(251,224,35)','rgb(76,162,222)','rgb(153,220,38)'];
+         var color = ['rgb(153,220,38)','rgb(76,162,222)','rgb(251,224,35)','rgb(247,146,33)','rgb(253,53,30)'];
          
          var imagelocations = ['UIScripts/images/emoticonsRating0.png',
 			                      'UIScripts/images/emoticonsRating1.png',

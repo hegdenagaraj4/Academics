@@ -1,6 +1,6 @@
 <?php
-// 	require_once 'connect.php';
-	require_once 'connectdeploy.php';
+	require_once 'connect.php';
+// 	require_once 'connectdeploy.php';
 	$query = 'select * from project';
 	$result = mysql_query($query) or die(header("HTTP/1.1 500 ".mysql_error()));
 	

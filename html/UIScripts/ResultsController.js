@@ -86,17 +86,17 @@ function resultsController(http,interval,$scope,technophiliaService){
 	
 	$scope.prepareDataForVotingDistribution = function(data){
 		var tempVotingDistribution = [
-			   			               { Rating: '0', Count: 0 },
-			   			               { Rating: '1', Count: 0 },
-			   			               { Rating: '2', Count: 0 },
-			   			               { Rating: '3', Count: 0 },
-						               { Rating: '4', Count: 0 }
+		                              { Rating: '4', Count: 0 },
+		                              { Rating: '3', Count: 0 },
+			   			              { Rating: '2', Count: 0 },
+			   			              { Rating: '1', Count: 0 }, 
+			   			              { Rating: '0', Count: 0 }
 						               ]; 
 		if(data.length > 0){//check for data is there or not
-			data = data.sort(function (a,b) {return parseInt(a.Rating) - parseInt(b.Rating)});
+			data = data.sort(function (a,b) {return parseInt(b.Rating) - parseInt(a.Rating)});
 			for ( var i = 0; i < data.length; i++) {
 				
-				tempVotingDistribution[parseInt(data[i]['Rating'])]['Count'] = parseInt(data[i]['Count']); 
+				tempVotingDistribution[tempVotingDistribution.length -1 -parseInt(data[i]['Rating'])]['Count'] = parseInt(data[i]['Count']); 
 			}
 			$scope.currentProjectVotingDistribution = tempVotingDistribution;
 		}

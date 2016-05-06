@@ -9,7 +9,7 @@ app.directive( 'crD3Bars', [
     	  
         var margin = {top: 10, right: 20, bottom: 30, left: 60},
           width = 1160 - margin.left - margin.right,
-          height = 338 - margin.top - margin.bottom;
+          height = 320 - margin.top - margin.bottom;
 		
 //		var colors = ["#004445", "#6fb98f","#2c7873"];
 		var colors = ['#5895c7'];

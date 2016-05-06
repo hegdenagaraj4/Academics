@@ -1,6 +1,6 @@
 <?php
-// 	require_once 'connect.php';
-	require_once 'connectdeploy.php';
+	require_once 'connect.php';
+// 	require_once 'connectdeploy.php';
 	
 	/* $query = "SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED" ;
 	$result = mysql_query($query) or die(mysql_error()); */

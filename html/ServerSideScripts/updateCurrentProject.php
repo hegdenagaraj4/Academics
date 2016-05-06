@@ -1,6 +1,6 @@
 <?php
-// 	require_once 'connect.php';
-	require_once 'connectdeploy.php';
+	require_once 'connect.php';
+// 	require_once 'connectdeploy.php';
 	
 	if (isset($_GET['currentProject']))
 	{
